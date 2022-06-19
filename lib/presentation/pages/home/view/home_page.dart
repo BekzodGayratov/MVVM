@@ -8,32 +8,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(),
-      child: BlocBuilder<HomeCubit, HomeStates>(builder: (context, state) {
-        return myScaffold(context);
-      }),
-    );
+    return BlocBuilder<HomeCubit, HomeStates>(
+        builder: (context, state) => myScaffold(context));
   }
 
   Scaffold myScaffold(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("MVVM")),
-        body: FutureBuilder(
-          future: context.read<HomeCubit>().getData(),
-          builder: (context, AsyncSnapshot snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
-              );
-            } else if (snapshot.hasError) {
-              return const Center(
-                child: Text("Server errror"),
-              );
-            } else {
-              return Center(child: Text("Ma'lumot keldi"),);
-            }
-          },
-        ));
+      appBar: AppBar(title: const Text("MVVM")),
+      body: Center(
+        child: Text(context.watch<HomeCubit>().counter.toString(),style: TextStyle(fontSize:60),),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        context.read<HomeCubit>().incrementCounter();
+      }),
+    );
   }
 }

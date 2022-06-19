@@ -14,10 +14,10 @@ class HomeChangeState extends HomeStates {
   HomeChangeState();
 }
 
-class HomeErrorState extends HomeStates {
-  HomeErrorState();
-}
-
 class HomeCompleteState extends HomeStates {
   HomeCompleteState();
+}
+
+class HomeErrorState extends HomeStates {
+  HomeErrorState();
 }
